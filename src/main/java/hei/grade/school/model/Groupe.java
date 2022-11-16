@@ -24,14 +24,14 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table
-public class Group {
+public class Groupe {
     @Id
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
     private String name;
     private String level;
-    private LocalDate start_date;
-    private LocalDate end_date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private boolean status;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)

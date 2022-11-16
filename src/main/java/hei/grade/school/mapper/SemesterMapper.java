@@ -1,5 +1,7 @@
 package hei.grade.school.mapper;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,9 +12,9 @@ import lombok.Setter;
 public class SemesterMapper {
     private String name;
 
-    private String startTime;
+    private LocalDate startDate;
 
-    private String endTime;
+    private LocalDate endDate;
 
     private boolean status;
 }

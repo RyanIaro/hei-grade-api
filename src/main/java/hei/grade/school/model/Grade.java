@@ -28,8 +28,8 @@ public class Grade {
     private Float mark;
 
     @ManyToOne
-    private Users users_id;
+    private Users users;
 
     @ManyToOne
-    private Evaluation evaluation_id;
+    private Evaluation evaluation;
 }

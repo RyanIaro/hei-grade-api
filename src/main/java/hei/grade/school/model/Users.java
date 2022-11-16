@@ -30,18 +30,18 @@ public class Users {
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
 
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private Character sex;
-    private LocalDate birth_date;
+    private LocalDate birthDate;
     private String address;
     private String phone;
     private String email;
-    private LocalDate entrance_datetime;
+    private LocalDate entranceDatetime;
     private String status;
 
     @ManyToOne
-    private Group group_id;
+    private Groupe groupe;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grade> grade;

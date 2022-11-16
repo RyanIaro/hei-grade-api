@@ -25,6 +25,6 @@ public class Mention {
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
     private String name;
-    private Float start_note;
-    private Float end_note;
+    private Float startNote;
+    private Float endNote;
 }

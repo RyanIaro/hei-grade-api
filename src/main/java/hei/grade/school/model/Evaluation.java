@@ -26,12 +26,12 @@ public class Evaluation {
     @Id
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
-    private LocalDate date_exam;
-    private boolean status;
+    private LocalDate dateExam;
+    private Boolean status;
 
     @ManyToOne
-    private Semester semester_id;
+    private Semester semester;
 
     @ManyToOne
-    private Course course_id;
+    private Course course;
 }
