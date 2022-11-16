@@ -19,7 +19,7 @@ public class SemesterService {
         return semesterRepository.findAll();
     }
 
-    private Semester addSemester(SemesterMapper semesterMapper){
+    public Semester addSemester(SemesterMapper semesterMapper){
         Semester semester = new Semester();
         semester.setName(semesterMapper.getName());
         semester.setStartTime(semesterMapper.getStartTime());
@@ -31,11 +31,11 @@ public class SemesterService {
         return semesterRepository.findById(Long.valueOf(semester.getId())).get();
     }
 
-    private Semester findSemesterById(String id){
+    public Semester findSemesterById(String id){
         return semesterRepository.findById(Long.valueOf(id)).get();
     }
 
-    private Semester updateSemesterById(String id, SemesterMapper semesterMapper){
+    public Semester updateSemesterById(String id, SemesterMapper semesterMapper){
 
         Semester semester = semesterRepository.findById(Long.valueOf(id)).get();
         semester.setName(semesterMapper.getName());
@@ -48,7 +48,7 @@ public class SemesterService {
         return semesterRepository.findById(Long.valueOf(semester.getId())).get();
     }
 
-    private void deleteSemesterById(String id){
+    public void deleteSemesterById(String id){
          semesterRepository.deleteById(Long.valueOf(id));
     }
 
