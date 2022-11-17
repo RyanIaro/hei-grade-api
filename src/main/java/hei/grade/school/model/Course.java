@@ -27,8 +27,15 @@ public class Course {
     @Id
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
+
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evaluation> evaluation;
+
+    public Course(String name) {
+        this.name = name;
+    }
+
 }

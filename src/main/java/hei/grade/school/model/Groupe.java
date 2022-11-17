@@ -28,12 +28,30 @@ public class Groupe {
     @Id
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String level;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private boolean status;
+    private LocalDate startDate = LocalDate.now();
+    private LocalDate endDate = null;
+    private Boolean status = true;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Users> users;
+
+    public Groupe(String name, String level) {
+        this.name = name;
+        this.level = level;
+    }
+
+    public Groupe(String name, String level, LocalDate startDate, LocalDate endDate, Boolean status) {
+        this.name = name;
+        this.level = level;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+    }
+
 }
