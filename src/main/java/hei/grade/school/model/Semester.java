@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -32,9 +33,15 @@ public class Semester {
     @Id
     @Column(name = "id", nullable = false)
     private String id = UUID.randomUUID().toString();
+
     private String name;
+
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate startDate;
+
+    @JsonFormat(pattern ="yyyy-MM-dd")
     private LocalDate endDate;
+
     private Boolean status;
 
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)

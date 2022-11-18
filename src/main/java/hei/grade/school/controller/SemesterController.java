@@ -19,29 +19,29 @@ public class SemesterController {
         return semesterService.findAllSemester();
     }
 
-    @GetMapping("/semester/{id}")
+    @GetMapping("/semester/{id_semester}")
     public Semester getSemesterById(@PathVariable String id_semester){
         return semesterService.findSemesterById(id_semester);
     }
 
-    @PostMapping("semester")
+    @PostMapping("/semester")
     public Semester createSemester(
             @RequestBody SemesterMapper semesterMapper
     ){
         return semesterService.addSemester(semesterMapper);
     }
 
-    @PutMapping("semester/semester_id")
+    @PutMapping("/semester/{semester_id}")
     public Semester updateSemester(
-            @PathVariable String id_semester,
+            @PathVariable String semester_id,
             @RequestBody SemesterMapper semesterMapper
     ){
-        return semesterService.updateSemesterById(id_semester, semesterMapper);
+        return semesterService.updateSemesterById(semester_id, semesterMapper);
     }
 
     @DeleteMapping("/semester/{id_semester}")
-    public void deleteSemesterById(@PathVariable String id_semester){
-         semesterService.deleteSemesterById(id_semester);
+    public String deleteSemesterById(@PathVariable String id_semester){
+         return semesterService.deleteSemesterById(id_semester);
     }
 
 }

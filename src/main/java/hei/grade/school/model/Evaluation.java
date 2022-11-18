@@ -3,12 +3,9 @@ package hei.grade.school.model;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,8 +27,10 @@ public class Evaluation {
     private Boolean status;
 
     @ManyToOne
+    @JoinColumn(name = "id_Semester")
     private Semester semester;
 
     @ManyToOne
+    @JoinColumn(name = "id_Course")
     private Course course;
 }

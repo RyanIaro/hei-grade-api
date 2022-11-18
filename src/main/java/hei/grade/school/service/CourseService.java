@@ -78,7 +78,7 @@ public class CourseService {
                     String.format("Error: Course with id %s not found in database ", id));
         }
         courseRepository.deleteById(id);
-        return "Course delete With Success";
+        return "Course deleted With Success";
     }
 
 }

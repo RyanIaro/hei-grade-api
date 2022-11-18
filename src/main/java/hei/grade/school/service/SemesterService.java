@@ -51,8 +51,10 @@ public class SemesterService {
         return semesterRepository.findById(semester.getId()).get();
     }
 
-    public void deleteSemesterById(String id) {
+    public String deleteSemesterById(String id) {
+
         semesterRepository.deleteById(id);
+        return "Evaluation deleted With Success";
     }
 
 }
