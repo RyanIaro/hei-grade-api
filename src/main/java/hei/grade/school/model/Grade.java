@@ -2,11 +2,7 @@ package hei.grade.school.model;
 
 import java.util.UUID;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,8 +24,10 @@ public class Grade {
     private Float mark;
 
     @ManyToOne
+    @JoinColumn(name = "id_user")
     private Users users;
 
     @ManyToOne
+    @JoinColumn(name = "id_evaluation")
     private Evaluation evaluation;
 }

@@ -2,7 +2,6 @@ package hei.grade.school.service;
 
 import hei.grade.school.mapper.EvaluationMapper;
 import hei.grade.school.model.Evaluation;
-import hei.grade.school.model.Semester;
 import hei.grade.school.repository.CourseRepository;
 import hei.grade.school.repository.EvalutionRepository;
 import hei.grade.school.repository.SemesterRepository;
@@ -43,7 +42,7 @@ public class EvaluationService {
             evalutionRepository.save(newEvaluation);
         } catch (ResponseStatusException e) {
             new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "Serveur Error: Unable to create Course");
+                    "Serveur Error: Unable to create evaluation");
         }
         return evalutionRepository.findById(newEvaluation.getId()).get();
     }
@@ -52,21 +51,37 @@ public class EvaluationService {
     @Transactional // Update evaluation by id
     public Evaluation updateEvaluation(String evaluation_id, EvaluationMapper evaluationMapper){
 
-        Evaluation evaluation = evalutionRepository.findById(evaluation_id).get();
+        boolean evaluationExists = evalutionRepository.existsById(evaluation_id);
+        if (!evaluationExists) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Error: Evaluation with id %s not found in database ", evaluation_id));
+        }
 
-        evaluation.setDateExam(evaluationMapper.getDateExam());
-        evaluation.setStatus(evaluationMapper.getStatus());
-        evaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
-        evaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
+        try {
+            Evaluation evaluation = evalutionRepository.findById(evaluation_id).get();
 
-        evalutionRepository.save(evaluation);
+            evaluation.setDateExam(evaluationMapper.getDateExam());
+            evaluation.setStatus(evaluationMapper.getStatus());
+            evaluation.setSemester(semesterRepository.findById(evaluationMapper.getSemester_id()).get());
+            evaluation.setCourse(courseRepository.findById(evaluationMapper.getCourse_id()).get());
 
-        return evalutionRepository.findById(evaluation.getId()).get();
+            evalutionRepository.save(evaluation);
+        } catch (ResponseStatusException e) {
+            new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "Serveur Error: Unable to update evaluation");
+        }
+
+
+        return evalutionRepository.findById(evaluation_id).get();
     }
 
     // Delete an evaluation by id
     public String deleteEvaluationById(String evaluation_id){
-
+        boolean evaluationExists = evalutionRepository.existsById(evaluation_id);
+        if (!evaluationExists) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Error: Evaluation with id %s not found in database ", evaluation_id));
+        }
         evalutionRepository.deleteById(evaluation_id);
         return "Evaluation deleted With Success";
     }
